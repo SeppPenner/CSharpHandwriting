@@ -9,7 +9,7 @@ The assembly was written and tested in .Net 4.7.
 [![GitHub forks](https://img.shields.io/github/forks/SeppPenner/CSharpHandwriting.svg)](https://github.com/SeppPenner/CSharpHandwriting/network)
 [![GitHub stars](https://img.shields.io/github/stars/SeppPenner/CSharpHandwriting.svg)](https://github.com/SeppPenner/CSharpHandwriting/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/SeppPenner/CSharpHandwriting/master/License.txt)
-[![Not finished](https://img.shields.io/badge/-not--finished-red.svg](https://img.shields.io/badge/-not--finished-red.svg)
+[![Not finished](https://img.shields.io/badge/-not--finished-red.svg]
 
 This project is based on https://www.codeproject.com/Articles/143059/Neural-Network-for-Recognition-of-Handwritten-Di.
 
