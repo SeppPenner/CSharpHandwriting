@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{851A85B2-96E9-4CF6-B4F1-510978FF357C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NeuralNetworkLibrary</RootNamespace>
+    <AssemblyName>NeuralNetworkLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activation Functions\IActivationFunction.cs" />
+    <Compile Include="Activation Functions\SigmoidFunction.cs" />
+    <Compile Include="ArchiveSerialization\Archive.cs" />
+    <Compile Include="ArchiveSerialization\ArchiveOp.cs" />
+    <Compile Include="ArchiveSerialization\OleCurrencyStatus.cs" />
+    <Compile Include="ArchiveSerialization\OleDateTimeStatus.cs" />
+    <Compile Include="DataFiles\ImageFileBegining.cs" />
+    <Compile Include="DataFiles\ImagePattern.cs" />
+    <Compile Include="DataFiles\IniFile.cs" />
+    <Compile Include="DataFiles\LabelFileBegining.cs" />
+    <Compile Include="DataFiles\MnistDatabase.cs" />
+    <Compile Include="ArchiveSerialization\IArchiveSerialization.cs" />
+    <Compile Include="ArchiveSerialization\IMfcArchiveSerialization.cs" />
+    <Compile Include="ArchiveSerialization\MfcArchive.cs" />
+    <Compile Include="ArchiveSerialization\MfcStringReader.cs" />
+    <Compile Include="MyDefinitions.cs" />
+    <Compile Include="NeuralNetwork\DErrorsList.cs" />
+    <Compile Include="NeuralNetwork\NeuralNetwork .cs" />
+    <Compile Include="NeuralNetwork\NNForwardPropagation.cs" />
+    <Compile Include="NNConnections\NNConnection.cs" />
+    <Compile Include="NNConnections\NNConnectionList.cs" />
+    <Compile Include="NNLayers\NNLayer.cs" />
+    <Compile Include="NNLayers\NNLayerList.cs" />
+    <Compile Include="HiPerfTimer.cs" />
+    <Compile Include="NNNeurons\NNNeuron.cs" />
+    <Compile Include="NNNeurons\NNNeuronList.cs" />
+    <Compile Include="NNNeurons\NNNeuronOutputList.cs" />
+    <Compile Include="NNNeurons\NNNeuronOutputs.cs" />
+    <Compile Include="NNWeights\NNWeight.cs" />
+    <Compile Include="NNWeights\NNWeightList.cs" />
+    <Compile Include="ArchiveSerialization\Preferences.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ArchiveSerialization\VersionException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
