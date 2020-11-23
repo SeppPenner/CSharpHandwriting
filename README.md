@@ -8,7 +8,7 @@ The assembly was written and tested in .Net 5.0.
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/CSharpHandwriting.svg)](https://github.com/SeppPenner/CSharpHandwriting/issues)
 [![GitHub forks](https://img.shields.io/github/forks/SeppPenner/CSharpHandwriting.svg)](https://github.com/SeppPenner/CSharpHandwriting/network)
 [![GitHub stars](https://img.shields.io/github/stars/SeppPenner/CSharpHandwriting.svg)](https://github.com/SeppPenner/CSharpHandwriting/stargazers)
-[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/SeppPenner/CSharpHandwriting/master/License.txt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/SeppPenner/CSharpHandwriting/master/License.txt)
 
 The project is not finished and throws errors currently.
 
