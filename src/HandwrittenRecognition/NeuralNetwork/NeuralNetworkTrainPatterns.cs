@@ -24,6 +24,7 @@ namespace HandwrittenRecognition.NeuralNetwork
     /// <summary>
     /// The neural network train patterns.
     /// </summary>
+    // ReSharper disable ArrangeRedundantParentheses
     public class NeuralNetworkTrainPatterns : NeuronalNetworkForwardPropagation
     {
         /// <summary>

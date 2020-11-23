@@ -27,15 +27,11 @@ namespace HandwrittenRecognition
     using NeuronalNetworkLibrary.NeuronalNetworkNeurons;
     using NeuronalNetworkLibrary.NeuronalNetworkWeights;
 
-    // delegates used to call MainForm functions from worker thread
-    public delegate void DelegateAddObject(int i, object s);
-
-    public delegate void DelegateThreadFinished();
-
     /// <summary>
     /// The main form.
     /// </summary>
-    public partial class MainForm : Form
+    // ReSharper disable ArrangeRedundantParentheses
+    public partial class MainForm : DelegateForm
     {
         /// <summary>
         /// The testing thread stop event.
@@ -158,7 +154,7 @@ namespace HandwrittenRecognition
             // Create neural network
             this.neuronalNetwork = new NeuronalNetwork();
             this.trainingNetwork = new NeuronalNetwork();
-            this.CreateNeuronalNetwork(this.neuronalNetwork);
+            CreateNeuronalNetwork(this.neuronalNetwork);
 
             // Initialize delegates
             this.DelegateAddObject = this.AddObject;
@@ -193,7 +189,7 @@ namespace HandwrittenRecognition
         /// <param name="stopThread">The stop thread event.</param>
         /// <param name="threadStopped">The thread stopped event.</param>
         /// <returns>A value indicating whether the threads have been stopped or not.</returns>
-        private static bool StopThreads(IList<Thread> threads, ManualResetEvent stopThread, ManualResetEvent threadStopped)
+        private static bool StopThreads(IList<Thread> threads, EventWaitHandle stopThread, WaitHandle threadStopped)
         {
             try
             {
@@ -213,7 +209,7 @@ namespace HandwrittenRecognition
                             // Instead of this we wait for event some appropriate time
                             // (and by the way give time to worker thread) and
                             // process events. These events may contain Invoke calls.
-                            if (WaitHandle.WaitAll(new WaitHandle[] { threadStopped }, 100, true))
+                            if (WaitHandle.WaitAll(new [] { threadStopped }, 100, true))
                             {
                                 break;
                             }
@@ -230,6 +226,255 @@ namespace HandwrittenRecognition
             {
                 MessageBox.Show(ex.ToString());
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Creates the neuronal network.
+        /// </summary>
+        /// <param name="network">The network.</param>
+        private static void CreateNeuronalNetwork(NeuronalNetwork network)
+        {
+            int ii, jj, kk;
+            var numberOfNeurons = 0;
+            const int NumberOfWeights = 0;
+            double initWeight;
+            string localLabel;
+            var random = new Random();
+
+            // Layer zero, the input layer.
+            // Create neurons: exactly the same number of neurons as the input
+            // vector of 29x29=841 pixels, and no weights/connections
+            var firstLayer = new NeuronalNetworkLayer("Layer00", null);
+            network.LayersList.Add(firstLayer);
+
+            for (ii = 0; ii < 841; ii++)
+            {
+                localLabel = $"Layer00_Neuron{ii}_Num{numberOfNeurons}";
+                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
+                numberOfNeurons++;
+            }
+
+            // Layer one:
+            // This layer is a convolutional layer that has 6 feature maps. Each feature 
+            // map is 13x13, and each unit in the feature maps is a 5x5 convolutional kernel
+            // of the input layer.
+            // So, there are 13x13x6 = 1014 neurons, (5x5+1)x6 = 156 weights
+            firstLayer = new NeuronalNetworkLayer("Layer01", firstLayer);
+            network.LayersList.Add(firstLayer);
+
+            for (ii = 0; ii < 1014; ii++)
+            {
+                localLabel = $"Layer01_Neuron{ii}_Num{numberOfNeurons}";
+                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
+                numberOfNeurons++;
+            }
+
+            for (ii = 0; ii < 156; ii++)
+            {
+                localLabel = $"Layer01_Weigh{ii}_Num{NumberOfWeights}";
+                initWeight = 0.05 * ((2.0 * random.NextDouble()) - 1.0);
+                firstLayer.Weights.Add(new NeuronalNetworkWeight(localLabel, initWeight));
+            }
+
+            // Interconnections with previous layer: this is difficult
+            // The previous layer is a top-down bitmap image that has been padded to size 29x29
+            // Each neuron in this layer is connected to a 5x5 kernel in its feature map, which 
+            // is also a top-down bitmap of size 13x13.  We move the kernel by TWO pixels, i.e., we
+            // skip every other pixel in the input image
+            var kernelTemplate = new[]
+            {
+                0, 1, 2, 3, 4,
+                29, 30, 31, 32, 33,
+                58, 59, 60, 61, 62,
+                87, 88, 89, 90, 91,
+                116, 117, 118, 119, 120
+            };
+
+            int numberOfWeightsPerFeatureMap;
+
+            int i;
+
+            for (i = 0; i < 6; i++)
+            {
+                for (ii = 0; ii < 13; ii++)
+                {
+                    for (jj = 0; jj < 13; jj++)
+                    {
+                        // 26 is the number of weights per feature map
+                        numberOfWeightsPerFeatureMap = i * 26;
+                        var n = firstLayer.Neurons[jj + (ii * 13) + (i * 169)];
+
+                        // Bias weight
+                        n.AddConnection(
+                            (uint)SystemGlobals.UlongMaximum,
+                            (uint)numberOfWeightsPerFeatureMap++);
+
+                        // Note: max val of index == 840, corresponding to 841 neurons in prev layer
+                        for (kk = 0; kk < 25; kk++)
+                        {
+                            n.AddConnection(
+                                (uint)((2 * jj) + (58 * ii) + kernelTemplate[kk]),
+                                (uint)numberOfWeightsPerFeatureMap++);
+                        }
+                    }
+                }
+            }
+
+            // Layer two:
+            // This layer is a convolutional layer that has 50 feature maps. Each feature 
+            // map is 5x5, and each unit in the feature maps is a 5x5 convolutional kernel
+            // of corresponding areas of all 6 of the previous layers, each of which is a 13x13 feature map
+            // So, there are 5x5x50 = 1250 neurons, (5x5+1)x6x50 = 7800 weights
+            firstLayer = new NeuronalNetworkLayer("Layer02", firstLayer);
+            network.LayersList.Add(firstLayer);
+
+            for (ii = 0; ii < 1250; ii++)
+            {
+                localLabel = $"Layer02_Neuron{ii}_Num{numberOfNeurons}";
+                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
+                numberOfNeurons++;
+            }
+
+            for (ii = 0; ii < 7800; ii++)
+            {
+                localLabel = $"Layer02_Weight{ii}_Num{NumberOfWeights}";
+                initWeight = 0.05 * ((2.0 * random.NextDouble()) - 1.0);
+                firstLayer.Weights.Add(new NeuronalNetworkWeight(localLabel, initWeight));
+            }
+
+            // Interconnections with previous layer: this is difficult
+            // Each feature map in the previous layer is a top-down bitmap image whose size
+            // is 13x13, and there are 6 such feature maps. Each neuron in one 5x5 feature map of this 
+            // layer is connected to a 5x5 kernel positioned correspondingly in all 6 parent
+            // feature maps, and there are individual weights for the six different 5x5 kernels.  As
+            // before, we move the kernel by TWO pixels, i.e., we
+            // skip every other pixel in the input image. The result is 50 different 5x5 top-down bitmap
+            // feature maps
+            var kernelTemplate2 = new[]
+            {
+                0, 1, 2, 3, 4,
+                13, 14, 15, 16, 17,
+                26, 27, 28, 29, 30,
+                39, 40, 41, 42, 43,
+                52, 53, 54, 55, 56
+            };
+
+            for (i = 0; i < 50; i++)
+            {
+                for (ii = 0; ii < 5; ii++)
+                {
+                    for (jj = 0; jj < 5; jj++)
+                    {
+                        // 26 is the number of weights per feature map
+                        numberOfWeightsPerFeatureMap = i * 156;
+                        var n = firstLayer.Neurons[jj + (ii * 5) + (i * 25)];
+
+                        // Bias weight
+                        n.AddConnection((uint)SystemGlobals.UlongMaximum, (uint)numberOfWeightsPerFeatureMap++);
+
+                        for (kk = 0; kk < 25; kk++)
+                        {
+                            // note: max val of index == 1013, corresponding to 1014 neurons in prev layer
+                            n.AddConnection(
+                                (uint)((2 * jj) + (26 * ii) + kernelTemplate2[kk]),
+                                (uint)numberOfWeightsPerFeatureMap++);
+                            n.AddConnection(
+                                (uint)(169 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
+                                (uint)numberOfWeightsPerFeatureMap++);
+                            n.AddConnection(
+                                (uint)(338 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
+                                (uint)numberOfWeightsPerFeatureMap++);
+                            n.AddConnection(
+                                (uint)(507 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
+                                (uint)numberOfWeightsPerFeatureMap++);
+                            n.AddConnection(
+                                (uint)(676 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
+                                (uint)numberOfWeightsPerFeatureMap++);
+                            n.AddConnection(
+                                (uint)(845 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
+                                (uint)numberOfWeightsPerFeatureMap++);
+                        }
+                    }
+                }
+            }
+
+            // Layer three:
+            // This layer is a fully-connected layer with 100 units.  Since it is fully-connected,
+            // each of the 100 neurons in the layer is connected to all 1250 neurons in
+            // the previous layer.
+            // So, there are 100 neurons and 100*(1250+1)=125100 weights
+            firstLayer = new NeuronalNetworkLayer("Layer03", firstLayer);
+            network.LayersList.Add(firstLayer);
+
+            for (ii = 0; ii < 100; ii++)
+            {
+                localLabel = $"Layer03_Neuron{ii}_Num{numberOfNeurons}";
+                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
+                numberOfNeurons++;
+            }
+
+            for (ii = 0; ii < 125100; ii++)
+            {
+                localLabel = $"Layer03_Weight{ii}_Num{NumberOfWeights}";
+                initWeight = 0.05 * ((2.0 * random.NextDouble()) - 1.0);
+                firstLayer.Weights.Add(new NeuronalNetworkWeight(localLabel, initWeight));
+            }
+
+            // Interconnections with previous layer: fully-connected
+            // Weights are not shared in this layer
+            numberOfWeightsPerFeatureMap = 0;
+
+            for (i = 0; i < 100; i++)
+            {
+                var n = firstLayer.Neurons[i];
+
+                // Bias weight
+                n.AddConnection((uint)SystemGlobals.UlongMaximum, (uint)numberOfWeightsPerFeatureMap++);
+
+                for (ii = 0; ii < 1250; ii++)
+                {
+                    n.AddConnection((uint)ii, (uint)numberOfWeightsPerFeatureMap++);
+                }
+            }
+
+            // Layer four, the final (output) layer:
+            // This layer is a fully-connected layer with 10 units. Since it is fully-connected,
+            // each of the 10 neurons in the layer is connected to all 100 neurons in
+            // the previous layer.
+            // So, there are 10 neurons and 10*(100+1)=1010 weights
+            firstLayer = new NeuronalNetworkLayer("Layer04", firstLayer);
+            network.LayersList.Add(firstLayer);
+
+            for (ii = 0; ii < 10; ii++)
+            {
+                localLabel = $"Layer04_Neuron{ii}_Num{numberOfNeurons}";
+                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
+                numberOfNeurons++;
+            }
+
+            for (ii = 0; ii < 1010; ii++)
+            {
+                localLabel = $"Layer04_Weight{ii}_Num{NumberOfWeights}";
+                initWeight = 0.05 * ((2.0 * random.NextDouble()) - 1.0);
+                firstLayer.Weights.Add(new NeuronalNetworkWeight(localLabel, initWeight));
+            }
+
+            // Interconnections with previous layer: fully-connected
+            // Weights are not shared in this layer
+            numberOfWeightsPerFeatureMap = 0;
+
+            for (i = 0; i < 10; i++)
+            {
+                var n = firstLayer.Neurons[i];
+
+                // Bias weight
+                n.AddConnection((uint)SystemGlobals.UlongMaximum, (uint)numberOfWeightsPerFeatureMap++);
+
+                for (ii = 0; ii < 100; ii++)
+                {
+                    n.AddConnection((uint)ii, (uint)numberOfWeightsPerFeatureMap++);
+                }
             }
         }
 
@@ -498,7 +743,7 @@ namespace HandwrittenRecognition
             // Create the neural network
             try
             {
-                this.CreateNeuronalNetwork(this.trainingNetwork);
+                CreateNeuronalNetwork(this.trainingNetwork);
 
                 // Initialize the weight parameters to the network
                 if (this.weightsFile != string.Empty)
@@ -534,255 +779,6 @@ namespace HandwrittenRecognition
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Creates the neuronal network.
-        /// </summary>
-        /// <param name="network">The network.</param>
-        private void CreateNeuronalNetwork(NeuronalNetwork network)
-        {
-            int ii, jj, kk;
-            var numberOfNeurons = 0;
-            var numberOfWeights = 0;
-            double initWeight;
-            string localLabel;
-            var random = new Random();
-
-            // Layer zero, the input layer.
-            // Create neurons: exactly the same number of neurons as the input
-            // vector of 29x29=841 pixels, and no weights/connections
-            var firstLayer = new NeuronalNetworkLayer("Layer00", null);
-            network.LayersList.Add(firstLayer);
-
-            for (ii = 0; ii < 841; ii++)
-            {
-                localLabel = $"Layer00_Neuron{ii}_Num{numberOfNeurons}";
-                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
-                numberOfNeurons++;
-            }
-
-            // Layer one:
-            // This layer is a convolutional layer that has 6 feature maps. Each feature 
-            // map is 13x13, and each unit in the feature maps is a 5x5 convolutional kernel
-            // of the input layer.
-            // So, there are 13x13x6 = 1014 neurons, (5x5+1)x6 = 156 weights
-            firstLayer = new NeuronalNetworkLayer("Layer01", firstLayer);
-            network.LayersList.Add(firstLayer);
-
-            for (ii = 0; ii < 1014; ii++)
-            {
-                localLabel = $"Layer01_Neuron{ii}_Num{numberOfNeurons}";
-                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
-                numberOfNeurons++;
-            }
-
-            for (ii = 0; ii < 156; ii++)
-            {
-                localLabel = $"Layer01_Weigh{ii}_Num{numberOfWeights}";
-                initWeight = 0.05 * ((2.0 * random.NextDouble()) - 1.0);
-                firstLayer.Weights.Add(new NeuronalNetworkWeight(localLabel, initWeight));
-            }
-
-            // Interconnections with previous layer: this is difficult
-            // The previous layer is a top-down bitmap image that has been padded to size 29x29
-            // Each neuron in this layer is connected to a 5x5 kernel in its feature map, which 
-            // is also a top-down bitmap of size 13x13.  We move the kernel by TWO pixels, i.e., we
-            // skip every other pixel in the input image
-            var kernelTemplate = new[]
-            {
-                0, 1, 2, 3, 4,
-                29, 30, 31, 32, 33,
-                58, 59, 60, 61, 62,
-                87, 88, 89, 90, 91,
-                116, 117, 118, 119, 120
-            };
-
-            int numberOfWeightsPerFeatureMap;
-
-            int i;
-
-            for (i = 0; i < 6; i++)
-            {
-                for (ii = 0; ii < 13; ii++)
-                {
-                    for (jj = 0; jj < 13; jj++)
-                    {
-                        // 26 is the number of weights per feature map
-                        numberOfWeightsPerFeatureMap = i * 26;
-                        var n = firstLayer.Neurons[jj + (ii * 13) + (i * 169)];
-
-                        // Bias weight
-                        n.AddConnection(
-                            (uint)SystemGlobals.UlongMaximum,
-                            (uint)numberOfWeightsPerFeatureMap++);
-
-                        // Note: max val of index == 840, corresponding to 841 neurons in prev layer
-                        for (kk = 0; kk < 25; kk++)
-                        {
-                            n.AddConnection(
-                                (uint)((2 * jj) + (58 * ii) + kernelTemplate[kk]),
-                                (uint)numberOfWeightsPerFeatureMap++);
-                        }
-                    }
-                }
-            }
-
-            // Layer two:
-            // This layer is a convolutional layer that has 50 feature maps. Each feature 
-            // map is 5x5, and each unit in the feature maps is a 5x5 convolutional kernel
-            // of corresponding areas of all 6 of the previous layers, each of which is a 13x13 feature map
-            // So, there are 5x5x50 = 1250 neurons, (5x5+1)x6x50 = 7800 weights
-            firstLayer = new NeuronalNetworkLayer("Layer02", firstLayer);
-            network.LayersList.Add(firstLayer);
-
-            for (ii = 0; ii < 1250; ii++)
-            {
-                localLabel = $"Layer02_Neuron{ii}_Num{numberOfNeurons}";
-                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
-                numberOfNeurons++;
-            }
-
-            for (ii = 0; ii < 7800; ii++)
-            {
-                localLabel = $"Layer02_Weight{ii}_Num{numberOfWeights}";
-                initWeight = 0.05 * ((2.0 * random.NextDouble()) - 1.0);
-                firstLayer.Weights.Add(new NeuronalNetworkWeight(localLabel, initWeight));
-            }
-
-            // Interconnections with previous layer: this is difficult
-            // Each feature map in the previous layer is a top-down bitmap image whose size
-            // is 13x13, and there are 6 such feature maps. Each neuron in one 5x5 feature map of this 
-            // layer is connected to a 5x5 kernel positioned correspondingly in all 6 parent
-            // feature maps, and there are individual weights for the six different 5x5 kernels.  As
-            // before, we move the kernel by TWO pixels, i.e., we
-            // skip every other pixel in the input image. The result is 50 different 5x5 top-down bitmap
-            // feature maps
-            var kernelTemplate2 = new[]
-            {
-                0, 1, 2, 3, 4,
-                13, 14, 15, 16, 17,
-                26, 27, 28, 29, 30,
-                39, 40, 41, 42, 43,
-                52, 53, 54, 55, 56
-            };
-
-            for (i = 0; i < 50; i++)
-            {
-                for (ii = 0; ii < 5; ii++)
-                {
-                    for (jj = 0; jj < 5; jj++)
-                    {
-                        // 26 is the number of weights per feature map
-                        numberOfWeightsPerFeatureMap = i * 156;
-                        var n = firstLayer.Neurons[jj + (ii * 5) + (i * 25)];
-
-                        // Bias weight
-                        n.AddConnection((uint)SystemGlobals.UlongMaximum, (uint)numberOfWeightsPerFeatureMap++);
-
-                        for (kk = 0; kk < 25; kk++)
-                        {
-                            // note: max val of index == 1013, corresponding to 1014 neurons in prev layer
-                            n.AddConnection(
-                                (uint)((2 * jj) + (26 * ii) + kernelTemplate2[kk]),
-                                (uint)numberOfWeightsPerFeatureMap++);
-                            n.AddConnection(
-                                (uint)(169 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
-                                (uint)numberOfWeightsPerFeatureMap++);
-                            n.AddConnection(
-                                (uint)(338 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
-                                (uint)numberOfWeightsPerFeatureMap++);
-                            n.AddConnection(
-                                (uint)(507 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
-                                (uint)numberOfWeightsPerFeatureMap++);
-                            n.AddConnection(
-                                (uint)(676 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
-                                (uint)numberOfWeightsPerFeatureMap++);
-                            n.AddConnection(
-                                (uint)(845 + (2 * jj) + (26 * ii) + kernelTemplate2[kk]),
-                                (uint)numberOfWeightsPerFeatureMap++);
-                        }
-                    }
-                }
-            }
-
-            // Layer three:
-            // This layer is a fully-connected layer with 100 units.  Since it is fully-connected,
-            // each of the 100 neurons in the layer is connected to all 1250 neurons in
-            // the previous layer.
-            // So, there are 100 neurons and 100*(1250+1)=125100 weights
-            firstLayer = new NeuronalNetworkLayer("Layer03", firstLayer);
-            network.LayersList.Add(firstLayer);
-
-            for (ii = 0; ii < 100; ii++)
-            {
-                localLabel = $"Layer03_Neuron{ii}_Num{numberOfNeurons}";
-                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
-                numberOfNeurons++;
-            }
-
-            for (ii = 0; ii < 125100; ii++)
-            {
-                localLabel = $"Layer03_Weight{ii}_Num{numberOfWeights}";
-                initWeight = 0.05 * ((2.0 * random.NextDouble()) - 1.0);
-                firstLayer.Weights.Add(new NeuronalNetworkWeight(localLabel, initWeight));
-            }
-
-            // Interconnections with previous layer: fully-connected
-            // Weights are not shared in this layer
-            numberOfWeightsPerFeatureMap = 0; 
-
-            for (i = 0; i < 100; i++)
-            {
-                var n = firstLayer.Neurons[i];
-
-                // Bias weight
-                n.AddConnection((uint)SystemGlobals.UlongMaximum, (uint)numberOfWeightsPerFeatureMap++);
-
-                for (ii = 0; ii < 1250; ii++)
-                {
-                    n.AddConnection((uint)ii, (uint)numberOfWeightsPerFeatureMap++);
-                }
-            }
-
-            // Layer four, the final (output) layer:
-            // This layer is a fully-connected layer with 10 units. Since it is fully-connected,
-            // each of the 10 neurons in the layer is connected to all 100 neurons in
-            // the previous layer.
-            // So, there are 10 neurons and 10*(100+1)=1010 weights
-            firstLayer = new NeuronalNetworkLayer("Layer04", firstLayer);
-            network.LayersList.Add(firstLayer);
-
-            for (ii = 0; ii < 10; ii++)
-            {
-                localLabel = $"Layer04_Neuron{ii}_Num{numberOfNeurons}";
-                firstLayer.Neurons.Add(new NeuronalNetworkNeuron(localLabel));
-                numberOfNeurons++;
-            }
-
-            for (ii = 0; ii < 1010; ii++)
-            {
-                localLabel = $"Layer04_Weight{ii}_Num{numberOfWeights}";
-                initWeight = 0.05 * ((2.0 * random.NextDouble()) - 1.0);
-                firstLayer.Weights.Add(new NeuronalNetworkWeight(localLabel, initWeight));
-            }
-
-            // Interconnections with previous layer: fully-connected
-            // Weights are not shared in this layer
-            numberOfWeightsPerFeatureMap = 0; 
-
-            for (i = 0; i < 10; i++)
-            {
-                var n = firstLayer.Neurons[i];
-
-                // Bias weight
-                n.AddConnection((uint)SystemGlobals.UlongMaximum, (uint)numberOfWeightsPerFeatureMap++);
-
-                for (ii = 0; ii < 100; ii++)
-                {
-                    n.AddConnection((uint)ii, (uint)numberOfWeightsPerFeatureMap++);
-                }
-            }
         }
 
         /// <summary>
@@ -830,19 +826,6 @@ namespace HandwrittenRecognition
             }
 
             this.trainingThreadRunning = false;
-        }
-
-        /// <summary>
-        /// Loads an image from the file.
-        /// </summary>
-        /// <param name="source">The image source.</param>
-        /// <returns>The image as <see cref="Bitmap"/>.</returns>
-        private Bitmap CreateNonIndexedImage(Image source)
-        {
-            var newImage = new Bitmap(source.Width, source.Height, PixelFormat.Format32bppArgb);
-            using var graphics = Graphics.FromImage(newImage);
-            graphics.DrawImage(source, 0, 0);
-            return newImage;
         }
 
         /// <summary>
@@ -946,7 +929,7 @@ namespace HandwrittenRecognition
             // Create the neuronal network
             try
             {
-                this.CreateNeuronalNetwork(neuronalNetworkLocal);
+                CreateNeuronalNetwork(neuronalNetworkLocal);
 
                 // Initialize weight parameters to the network
                 if (this.weightsFile != string.Empty)

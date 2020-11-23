@@ -398,16 +398,16 @@ namespace NeuronalNetworkLibrary.DataFiles
         /// <param name="flipGrayscale">A value indicating whether the bytes should be flipped with Grayscale algorithm.</param>
         private void GetPatternArrayValues(out byte patternLabel, byte[] patternArray = null, bool flipGrayscale = true)
         {
-            uint imageSize = SystemGlobals.ImageSize * SystemGlobals.ImageSize;
+            const uint ImageSize = SystemGlobals.ImageSize * SystemGlobals.ImageSize;
 
             if (this.imageFileOpen)
             {
                 if (patternArray != null)
                 {
-                    this.loadImageFileStream.Read(patternArray, 0, (int)imageSize);
+                    this.loadImageFileStream.Read(patternArray, 0, (int)ImageSize);
                     if (flipGrayscale)
                     {
-                        for (var ii = 0; ii < imageSize; ++ii)
+                        for (var ii = 0; ii < ImageSize; ++ii)
                         {
                             patternArray[ii] = Convert.ToByte(255 - Convert.ToInt32(patternArray[ii]));
                         }
@@ -419,9 +419,9 @@ namespace NeuronalNetworkLibrary.DataFiles
                 // No files are open: Return a simple gray wedge
                 if (patternArray != null)
                 {
-                    for (var ii = 0; ii < imageSize; ++ii)
+                    for (var ii = 0; ii < ImageSize; ++ii)
                     {
-                        patternArray[ii] = Convert.ToByte(ii * 255 / imageSize);
+                        patternArray[ii] = Convert.ToByte(ii * 255 / ImageSize);
                     }
                 }
             }

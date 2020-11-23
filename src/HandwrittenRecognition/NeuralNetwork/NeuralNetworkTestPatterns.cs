@@ -22,6 +22,7 @@ namespace HandwrittenRecognition.NeuralNetwork
     /// <summary>
     /// The neural network test patterns.
     /// </summary>
+    // ReSharper disable ArrangeRedundantParentheses
     public class NeuralNetworkTestPatterns : NeuronalNetworkForwardPropagation
     {
         /// <summary>

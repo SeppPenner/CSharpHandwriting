@@ -20,6 +20,7 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
     /// <summary>
     /// The neuronal network forward propagation class.
     /// </summary>
+    // ReSharper disable ArrangeRedundantParentheses
     public class NeuronalNetworkForwardPropagation
     {
         /// <summary>
@@ -55,30 +56,15 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
         /// <summary>
         /// The mutexes.
         /// </summary>
-        // ReSharper disable once CollectionNeverUpdated.Local
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+        // ReSharper disable once CollectionNeverUpdated.Local
         private readonly List<Mutex> mutexes;
-
-        /// <summary>
-        /// The stop event event.
-        /// </summary>
-        private ManualResetEvent eventStop;
-
-        /// <summary>
-        /// The event stopped event.
-        /// </summary>
-        private ManualResetEvent eventStopped;
 
         /// <summary>
         /// The high performance timer.
         /// </summary>
         // ReSharper disable once NotAccessedField.Local
         private HighPerformanceTimer highPerformanceTimer;
-
-        /// <summary>
-        /// The number of images.
-        /// </summary>
-        private uint numberOfImages;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NeuronalNetworkForwardPropagation"/> class.
@@ -89,11 +75,8 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
             this.CurrentPatternIndex = 0;
             this.DataReady = false;
             this.NeuronalNetwork = null;
-            this.eventStop = null;
-            this.eventStopped = null;
             this.mutexes = new List<Mutex>(4);
             this.highPerformanceTimer = new HighPerformanceTimer();
-            this.numberOfImages = 0;
             this.numberOfColumns = 29;
             this.numberOfRows = 29;
             this.count = this.numberOfColumns * this.numberOfRows;

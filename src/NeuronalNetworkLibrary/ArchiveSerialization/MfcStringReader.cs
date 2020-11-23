@@ -15,6 +15,7 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
     /// <summary>
     /// The MFC string reader class.
     /// </summary>
+    // ReSharper disable ArrangeRedundantParentheses
     public static class MfcStringReader
     {
         /// <summary>

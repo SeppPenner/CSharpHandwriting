@@ -34,26 +34,12 @@ namespace NeuronalNetworkLibrary
         private long stopTime;
 
         /// <summary>
-        /// A value indicting whether the timer has started.
-        /// </summary>
-        // ReSharper disable once UnusedMember.Global
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private bool started;
-
-        /// <summary>
-        /// Gets or sets a value indicting whether the timer has stopped.
-        /// </summary>
-        private bool stopped;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="HighPerformanceTimer"/> class.
         /// </summary>
         public HighPerformanceTimer()
         {
             this.startTime = 0;
             this.stopTime = 0;
-            this.started = false;
-            this.stopped = true;
 
             if (QueryPerformanceFrequency(out this.frequency) == false)
             {
@@ -75,8 +61,6 @@ namespace NeuronalNetworkLibrary
             // lets do the waiting threads there work
             Thread.Sleep(0);
             QueryPerformanceCounter(out this.startTime);
-            this.started = true;
-            this.stopped = false;
         }
 
         /// <summary>
@@ -86,8 +70,6 @@ namespace NeuronalNetworkLibrary
         public void Stop()
         {
             QueryPerformanceCounter(out this.stopTime);
-            this.started = false;
-            this.stopped = true;
         }
 
         /// <summary>

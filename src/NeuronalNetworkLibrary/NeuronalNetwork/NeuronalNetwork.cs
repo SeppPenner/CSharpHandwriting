@@ -115,13 +115,16 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
                     return;
                 }
 
+                // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
                 foreach (var neurons in list.Neurons)
                 {
-                    if (count < inputCount)
+                    if (count >= inputCount)
                     {
-                        neurons.Output = inputVector[count];
-                        count++;
+                        continue;
                     }
+
+                    neurons.Output = inputVector[count];
+                    count++;
                 }
             }
 

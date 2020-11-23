@@ -24,6 +24,7 @@ namespace NeuronalNetworkLibrary.NeuronalNetworkLayers
     /// The neuronal network layer class.
     /// </summary>
     /// <seealso cref="IArchiveSerialization"/>
+    // ReSharper disable ArrangeRedundantParentheses
     public sealed class NeuronalNetworkLayer : IArchiveSerialization
     {
         /// <summary>
@@ -247,6 +248,7 @@ namespace NeuronalNetworkLibrary.NeuronalNetworkLayers
         {
             // Called periodically by the neuronal network, to request a check on the "reasonableness" of the 
             // weights. The warning message is given only once per layer
+            // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
             foreach (var weight in this.Weights)
             {
                 var val = Math.Abs(weight.Value);
