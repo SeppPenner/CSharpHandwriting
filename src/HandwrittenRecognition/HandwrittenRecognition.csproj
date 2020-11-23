@@ -20,4 +20,10 @@
     <ProjectReference Include="..\NeuronalNetworkLibrary\NeuronalNetworkLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Settings.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

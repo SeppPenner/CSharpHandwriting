@@ -132,7 +132,7 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
             // "Gradient-Based Learning Applied to Document Recognition" at page 41
             this.micronLimitParameter = 0.10; // since we divide by this, update can never be more than 10x current eta
             this.NumberOfHessianPatterns = 500; // number of patterns used to calculate the diagonal Hessian
-            var path = Directory.GetCurrentDirectory() + "\\Data\\Default-ini.ini";
+            var path = Directory.GetCurrentDirectory() + "\\Settings.ini";
             this.iniFile = new IniFile(path);
             this.ReadIniFile();
         }
@@ -231,11 +231,11 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
             // Now read values from the ini file
 
             // The neuronal network parameters
-            var section = "Neuronal network Parameters";
+            var section = "Neuronal network parameters";
 
-            this.InitialEtaLearningRate = this.Get(section, "Initial learning rate (eta)", this.InitialEtaLearningRate);
-            this.MinimumEtaLearningRate = this.Get(section, "Minimum learning rate (eta)", this.MinimumEtaLearningRate);
-            this.LearningRateDecay = this.Get(section, "Rate of decay for learning rate (eta)", this.LearningRateDecay);
+            this.InitialEtaLearningRate = this.Get(section, "Initial learning rate (ETA)", this.InitialEtaLearningRate);
+            this.MinimumEtaLearningRate = this.Get(section, "Minimum learning rate (ETA)", this.MinimumEtaLearningRate);
+            this.LearningRateDecay = this.Get(section, "Rate of decay for learning rate (ETA)", this.LearningRateDecay);
             this.AfterEveryNBackPropagationItems = this.Get(section, "Decay rate is applied after this number of propagation", this.AfterEveryNBackPropagationItems);
             this.NumberOfBackPropagationThreads = this.Get(section, "Number of back propagation threads", this.NumberOfBackPropagationThreads);
             this.maximumNumberOfTestingThreads = this.Get(section, "Number of testing threads", this.maximumNumberOfTestingThreads);
@@ -270,12 +270,12 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
             this.NumberOfColumnImages = imageCount;
 
             // Parameters for controlling pattern distortion during back propagation
-            section = "Parameters for Controlling Pattern Distortion During Back propagation";
+            section = "Parameters for controlling pattern distortion during back propagation";
 
             this.MaximumScaling = this.Get(section, "Maximum scale factor change (percent, like 20.0 for 20%)", this.MaximumScaling);
             this.MaximumRotation = this.Get(section, "Maximum rotational change (degrees, like 20.0 for 20 degrees)", this.MaximumRotation);
-            this.ElasticSigma = this.Get(section, "Sigma for elastic distortions (higher numbers are more smooth and less distorted; Simard uses 4.0)", this.ElasticSigma);
-            this.ElasticScaling = this.Get(section, "Scaling for elastic distortions (higher numbers amplify distortions; Simard uses 0.34)", this.ElasticScaling);
+            this.ElasticSigma = this.Get(section, "Sigma for elastic distortions (higher numbers are more smooth and less distorted, Simard uses 4.0)", this.ElasticSigma);
+            this.ElasticScaling = this.Get(section, "Scaling for elastic distortions (higher numbers amplify distortions, Simard uses 0.34)", this.ElasticScaling);
         }
 
         /// <summary>
