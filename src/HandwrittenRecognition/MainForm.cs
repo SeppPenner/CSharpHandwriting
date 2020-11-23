@@ -17,7 +17,7 @@ namespace HandwrittenRecognition
     using System.Threading;
     using System.Windows.Forms;
 
-    using HandwrittenRecognition.NeuralNetwork;
+    using HandwrittenRecognition.Patterns;
 
     using NeuronalNetworkLibrary;
     using NeuronalNetworkLibrary.ArchiveSerialization;
@@ -71,7 +71,7 @@ namespace HandwrittenRecognition
         /// <summary>
         /// The neuronal network.
         /// </summary>
-        private readonly NeuronalNetwork neuronalNetwork;
+        private readonly NeuronalNetworkLibrary.NeuronalNetwork.NeuronalNetwork neuronalNetwork;
 
         /// <summary>
         /// The preferences.
@@ -81,7 +81,7 @@ namespace HandwrittenRecognition
         /// <summary>
         /// The training network.
         /// </summary>
-        private readonly NeuronalNetwork trainingNetwork;
+        private readonly NeuronalNetworkLibrary.NeuronalNetwork.NeuronalNetwork trainingNetwork;
 
         /// <summary>
         /// A value indicating whether the database is ready.
@@ -577,7 +577,7 @@ namespace HandwrittenRecognition
                 mutexes.Add(mutex);
             }
 
-            var testPatterns = new NeuralNetworkTestPatterns(
+            var testPatterns = new NeuronalNetworkTestPatterns(
                 this.neuronalNetwork,
                 this.database,
                 this.preferences,
@@ -762,7 +762,7 @@ namespace HandwrittenRecognition
                 return false;
             }
 
-            var trainingPatterns = new NeuralNetworkTrainPatterns(this.trainingNetwork, this.trainingDatabase, this.preferences, this.trainingDataReady, this.trainingThreadStop, this.trainingThreadStopped, this, mutexes)
+            var trainingPatterns = new NeuronalNetworkTrainPatterns(this.trainingNetwork, this.trainingDatabase, this.preferences, this.trainingDataReady, this.trainingThreadStop, this.trainingThreadStopped, this, mutexes)
             {
                 MinimumEta = minimumEta,
                 EtaDecay = etaDecay,
@@ -922,7 +922,7 @@ namespace HandwrittenRecognition
 
             var mutexes = new List<Mutex>(2);
             var numberOfThreads = (int)this.numericUpDownThreads.Value;
-            NeuralNetworkTestPatterns testingPatterns;
+            NeuronalNetworkTestPatterns testingPatterns;
             var neuronalNetworkLocal = new NeuronalNetwork();
             bool databaseForTest;
 
@@ -952,7 +952,7 @@ namespace HandwrittenRecognition
             {
                 if (this.testingDataReady)
                 {
-                    testingPatterns = new NeuralNetworkTestPatterns(
+                    testingPatterns = new NeuronalNetworkTestPatterns(
                         neuronalNetworkLocal,
                         this.testingDatabase,
                         this.preferences,
@@ -972,7 +972,7 @@ namespace HandwrittenRecognition
             {
                 if (this.trainingDataReady)
                 {
-                    testingPatterns = new NeuralNetworkTestPatterns(
+                    testingPatterns = new NeuronalNetworkTestPatterns(
                         neuronalNetworkLocal,
                         this.trainingDatabase,
                         this.preferences,

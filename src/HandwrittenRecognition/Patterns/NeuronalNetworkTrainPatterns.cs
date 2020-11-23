@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NeuralNetworkTrainPatterns.cs" company="Hämmer Electronics">
+// <copyright file="NeuronalNetworkTrainPatterns.cs" company="Hämmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace HandwrittenRecognition.NeuralNetwork
+namespace HandwrittenRecognition.Patterns
 {
     using System;
     using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace HandwrittenRecognition.NeuralNetwork
     /// The neural network train patterns.
     /// </summary>
     // ReSharper disable ArrangeRedundantParentheses
-    public class NeuralNetworkTrainPatterns : NeuronalNetworkForwardPropagation
+    public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
     {
         /// <summary>
         /// The main form.
@@ -99,7 +99,7 @@ namespace HandwrittenRecognition.NeuralNetwork
         private int neuralNetworks;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NeuralNetworkTrainPatterns"/> class.
+        /// Initializes a new instance of the <see cref="NeuronalNetworkTrainPatterns"/> class.
         /// </summary>
         /// <param name="neuronalNetwork">The neuronal network.</param>
         /// <param name="trainingSet">The training set.</param>
@@ -110,7 +110,7 @@ namespace HandwrittenRecognition.NeuralNetwork
         /// <param name="mainForm">The main form.</param>
         /// <param name="mutexes">The mutexes.</param>
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        public NeuralNetworkTrainPatterns(
+        public NeuronalNetworkTrainPatterns(
             NeuronalNetwork neuronalNetwork,
             NeuronalNetworkDatabase trainingSet,
             Preferences preferences,

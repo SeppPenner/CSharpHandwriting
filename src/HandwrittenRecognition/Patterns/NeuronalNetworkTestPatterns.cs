@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NeuralNetworkTestPatterns.cs" company="Hämmer Electronics">
+// <copyright file="NeuronalNetworkTestPatterns.cs" company="Hämmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace HandwrittenRecognition.NeuralNetwork
+namespace HandwrittenRecognition.Patterns
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -23,7 +23,7 @@ namespace HandwrittenRecognition.NeuralNetwork
     /// The neural network test patterns.
     /// </summary>
     // ReSharper disable ArrangeRedundantParentheses
-    public class NeuralNetworkTestPatterns : NeuronalNetworkForwardPropagation
+    public class NeuronalNetworkTestPatterns : NeuronalNetworkForwardPropagation
     {
         /// <summary>
         /// The main form.
@@ -67,7 +67,7 @@ namespace HandwrittenRecognition.NeuralNetwork
         private uint nextPattern;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NeuralNetworkTestPatterns"/> class.
+        /// Initializes a new instance of the <see cref="NeuronalNetworkTestPatterns"/> class.
         /// </summary>
         /// <param name="neuronalNetwork">The neuronal network.</param>
         /// <param name="testingSet">The testing set.</param>
@@ -78,7 +78,7 @@ namespace HandwrittenRecognition.NeuralNetwork
         /// <param name="mainForm">The form.</param>
         /// <param name="mutexes">The mutexes.</param>
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        public NeuralNetworkTestPatterns(
+        public NeuronalNetworkTestPatterns(
             NeuronalNetwork neuronalNetwork,
             NeuronalNetworkDatabase testingSet,
             Preferences preferences,
@@ -105,7 +105,7 @@ namespace HandwrittenRecognition.NeuralNetwork
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NeuralNetworkTestPatterns"/> class.
+        /// Initializes a new instance of the <see cref="NeuronalNetworkTestPatterns"/> class.
         /// </summary>
         /// <param name="neuronalNetwork">The neuronal network.</param>
         /// <param name="preferences">The preferences.</param>
@@ -113,7 +113,7 @@ namespace HandwrittenRecognition.NeuralNetwork
         /// <param name="mutexes">The mutexes.</param>
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         // ReSharper disable once UnusedMember.Global
-        public NeuralNetworkTestPatterns(NeuronalNetwork neuronalNetwork, Preferences preferences, MainForm mainForm, List<Mutex> mutexes)
+        public NeuronalNetworkTestPatterns(NeuronalNetwork neuronalNetwork, Preferences preferences, MainForm mainForm, List<Mutex> mutexes)
         {
             this.CurrentPatternIndex = 0;
             this.DataReady = true;
