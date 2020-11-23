@@ -265,7 +265,7 @@ namespace HandwrittenRecognition.Patterns
                 // Now back propagate
                 this.mutexes[3].ReleaseMutex();
 
-                this.BackPropagateNeuronalNetWork(
+                this.BackPropagateNeuronalNetwork(
                     inputVector,
                     841,
                     targetOutputVector,

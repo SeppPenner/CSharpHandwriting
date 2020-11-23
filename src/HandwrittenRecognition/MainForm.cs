@@ -71,7 +71,7 @@ namespace HandwrittenRecognition
         /// <summary>
         /// The neuronal network.
         /// </summary>
-        private readonly NeuronalNetworkLibrary.NeuronalNetwork.NeuronalNetwork neuronalNetwork;
+        private readonly NeuronalNetwork neuronalNetwork;
 
         /// <summary>
         /// The preferences.
@@ -81,7 +81,7 @@ namespace HandwrittenRecognition
         /// <summary>
         /// The training network.
         /// </summary>
-        private readonly NeuronalNetworkLibrary.NeuronalNetwork.NeuronalNetwork trainingNetwork;
+        private readonly NeuronalNetwork trainingNetwork;
 
         /// <summary>
         /// A value indicating whether the database is ready.

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SystemGlobals.cs" company="H�mmer Electronics">
+// <copyright file="SystemGlobals.cs" company="Hämmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
