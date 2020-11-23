@@ -122,9 +122,9 @@ namespace NeuronalNetworkLibrary.NeuronalNetworkLayers
         /// <param name="etaLearningRate">The ETA learning rate.</param>
         public void BackPropagate(ErrorsList errorList, ErrorsList previousErrorList, NeuronalNetworkNeuronOutputs thisLayerOutput, NeuronalNetworkNeuronOutputs previousLayerOutput, double etaLearningRate)
         {
-            // nomenclature (repeated from NeuralNetwork class):
+            // nomenclature (repeated from NeuronalNetwork class):
             //
-            // Err is output error of the entire neural net
+            // Err is output error of the entire neuronal network
             // Xn is the output vector on the n-th layer
             // Xnm1 is the output vector of the previous layer
             // Wn is the vector of weights of the n-th layer
@@ -301,13 +301,13 @@ namespace NeuronalNetworkLibrary.NeuronalNetworkLayers
         /// <param name="previousErrorList">The error list of the previous layer.</param>
         public void BackPropagateSecondDerivatives(ErrorsList errorList, ErrorsList previousErrorList)
         {
-            // nomenclature (repeated from NeuralNetwork class)
+            // nomenclature (repeated from NeuronalNetwork class)
             // NOTE: even though we are addressing SECOND derivatives ( and not first derivatives),
             // we use nearly the same notation as if there were first derivatives, since otherwise the
             // ASCII look would be confusing.  We add one "2" but not two "2's", such as "d2Err_wrt_dXn",
             // to give a gentle emphasis that we are using second derivatives
             //
-            // Err is output error of the entire neural net
+            // Err is output error of the entire neuronal network
             // Xn is the output vector on the n-th layer
             // Xnm1 is the output vector of the previous layer
             // Wn is the vector of weights of the n-th layer

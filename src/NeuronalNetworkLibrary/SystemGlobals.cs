@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SystemGlobals.cs" company="Hämmer Electronics">
+// <copyright file="SystemGlobals.cs" company="Hï¿½mmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
@@ -58,7 +58,7 @@ namespace NeuronalNetworkLibrary
         public const int IntegerMaximum = 0x7fffffff;
 
         /// <summary>
-        /// The gaussian field size constant.
+        /// The Gaussian field size constant.
         /// </summary>
         public const int GaussianFieldSize = 21;
     }

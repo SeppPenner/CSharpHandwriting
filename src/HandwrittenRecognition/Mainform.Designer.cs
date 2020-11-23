@@ -403,7 +403,7 @@
             this.groupBox1.Size = new System.Drawing.Size(594, 433);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Neural network training";
+            this.groupBox1.Text = "Neuronal network training";
             // 
             // tabControl1
             // 

@@ -165,10 +165,10 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
         /// <param name="outputCount">The output count.</param>
         /// <param name="outputList">The output list.</param>
         /// <param name="distort">A value indicating whether distort is used or not.</param>
-        protected void CalculateNeuralNet(double[] inputVector, int inputCount, double[] outputVector, int outputCount, NeuronalNetworkNeuronOutputsList outputList, bool distort)
+        protected void CalculateNeuronalNetwork(double[] inputVector, int inputCount, double[] outputVector, int outputCount, NeuronalNetworkNeuronOutputsList outputList, bool distort)
         {
             // Wrapper function for neuronal network's Calculate() function, needed because the neuronal network is a protected member
-            // Waits on the neural net mutex (using the CAutoMutex object, which automatically releases the
+            // Waits on the neuronal net mutex (using the CAutoMutex object, which automatically releases the
             // mutex when it goes out of scope) so as to restrict access to one thread at a time
             this.mutexes[0].WaitOne();
             {
@@ -311,7 +311,7 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
             // to the default values.  For example, if we only want half as harsh a distortion, set
             // severityFactor == 0.5
 
-            // First, elastic distortion, per Patrice Simard, "Best Practices For Convolutional Neural Networks..."
+            // First, elastic distortion, per Patrice Simard, "Best Practices For Convolutional Neuronal Networks..."
             // at page 2.
             // Three-step process: seed array with uniform randoms, filter with a Gaussian kernel, normalize (scale)
             int row, column;

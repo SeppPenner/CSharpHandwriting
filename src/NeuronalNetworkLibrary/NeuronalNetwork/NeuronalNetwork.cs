@@ -203,7 +203,7 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
 
             // Nomenclature:
             //
-            // Err is output error of the entire neural net
+            // Err is output error of the entire neuronal net
             // Xn is the output vector on the n-th layer
             // Xnm1 is the output vector of the previous layer
             // Wn is the vector of weights of the n-th layer

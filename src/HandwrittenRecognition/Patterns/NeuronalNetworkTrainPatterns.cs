@@ -3,7 +3,7 @@
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
-//   The neural network train patterns.
+//   The neuronal network train patterns.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ namespace HandwrittenRecognition.Patterns
     using NeuronalNetworkLibrary.NeuronalNetworkNeurons;
 
     /// <summary>
-    /// The neural network train patterns.
+    /// The neuronal network train patterns.
     /// </summary>
     // ReSharper disable ArrangeRedundantParentheses
     public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
@@ -79,7 +79,7 @@ namespace HandwrittenRecognition.Patterns
         private int nextPattern;
 
         /// <summary>
-        /// A value indicating whether hessian is needed or not.
+        /// A value indicating whether Hessian is needed or not.
         /// </summary>
         private bool needHessian;
 
@@ -94,9 +94,9 @@ namespace HandwrittenRecognition.Patterns
         private uint recognitions;
 
         /// <summary>
-        /// The number of neural networks.
+        /// The number of neuronal networks.
         /// </summary>
-        private int neuralNetworks;
+        private int neuronalNetworks;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NeuronalNetworkTrainPatterns"/> class.
@@ -134,7 +134,7 @@ namespace HandwrittenRecognition.Patterns
             this.needHessian = true;
             this.backProperties = 0;
             this.dmse = 0;
-            this.neuralNetworks = 0;
+            this.neuronalNetworks = 0;
             this.dmse200 = 0;
             this.highPerformanceTimer = new HighPerformanceTimer();
             this.GetGaussianKernel(this.Preferences.ElasticSigma);
@@ -265,7 +265,7 @@ namespace HandwrittenRecognition.Patterns
                 // Now back propagate
                 this.mutexes[3].ReleaseMutex();
 
-                this.BackPropagateNeuralNet(
+                this.BackPropagateNeuronalNetWork(
                     inputVector,
                     841,
                     targetOutputVector,
@@ -288,9 +288,9 @@ namespace HandwrittenRecognition.Patterns
                 this.dmse += localDmse;
                 this.dmse200 += localDmse;
 
-                // Determine the neural network's answer, and compare it to the actual answer.
+                // Determine the neuronal network's answer, and compare it to the actual answer.
                 // Post a message if the answer was incorrect, so the dialog can display mis-recognition statistics
-                this.neuralNetworks++;
+                this.neuronalNetworks++;
                 var bestIndex = 0;
                 var maxValue = -99.0;
 
@@ -313,13 +313,13 @@ namespace HandwrittenRecognition.Patterns
                 // Make step
                 string s;
 
-                if (this.neuralNetworks >= 200)
+                if (this.neuronalNetworks >= 200)
                 {
                     this.dmse200 /= 200;
                     s = "MSE:" + this.dmse200.ToString(CultureInfo.InvariantCulture);
                     this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 4, s);
                     this.dmse200 = 0;
-                    this.neuralNetworks = 0;
+                    this.neuronalNetworks = 0;
                 }
 
                 s = $"{Convert.ToString(this.nextPattern)} Miss Number:{this.recognitions}";
@@ -366,15 +366,15 @@ namespace HandwrittenRecognition.Patterns
         }
 
         /// <summary>
-        /// Calculates the hessian.
+        /// Calculates the Hessian.
         /// </summary>
         private void CalculateHessian()
         {
-            // Controls the Neural network's calculation if the diagonal Hessian for the Neural net
+            // Controls the neuronal network's calculation if the diagonal Hessian for the neuronal net
             // This will be called from a thread, so although the calculation is lengthy, it should not interfere
             // with the UI
 
-            // We need the neural net exclusively during this calculation, so grab it now
+            // We need the neuronal net exclusively during this calculation, so grab it now
             var inputVector = new double[841]; // Note: 29x29, not 28x28
 
             var targetOutputVector = new double[10];
@@ -447,7 +447,7 @@ namespace HandwrittenRecognition.Patterns
                 targetOutputVector[label] = 1.0;
 
                 // Apply distortion map to inputVector. It's not certain that this is needed or helpful.
-                // The second derivatives do NOT rely on the output of the neural net (i.e., because the 
+                // The second derivatives do NOT rely on the output of the neuronal net (i.e., because the 
                 // second derivative of the MSE function is exactly 1 (one), regardless of the actual output
                 // of the net). However, since the back propagated second derivatives rely on the outputs of
                 // each neuron, distortion of the pattern might reveal previously-unseen information about the
@@ -456,7 +456,7 @@ namespace HandwrittenRecognition.Patterns
                 this.GenerateDistortionMaps(0.65);
                 this.ApplyDistortionMap(inputVector);
 
-                // Forward calculate the neural network
+                // Forward calculate the neuronal network
                 this.NeuronalNetwork.Calculate(inputVector, 841, actualOutputVector, 10, null);
 
                 // Back propagate the second derivatives
@@ -485,7 +485,7 @@ namespace HandwrittenRecognition.Patterns
         }
 
         /// <summary>
-        /// Back propagates the neural network.
+        /// Back propagates the neuronal network.
         /// </summary>
         /// <param name="inputVector">The input vector.</param>
         /// <param name="inputCount">The input count.</param>
@@ -494,7 +494,7 @@ namespace HandwrittenRecognition.Patterns
         /// <param name="outputCount">The output count.</param>
         /// <param name="memorizedNeuronOutputs">The memorized neuronal outputs.</param>
         /// <param name="distort">The distort.</param>
-        private void BackPropagateNeuralNet(
+        private void BackPropagateNeuronalNetwork(
             double[] inputVector,
             int inputCount,
             double[] targetOutputVector,
@@ -503,7 +503,7 @@ namespace HandwrittenRecognition.Patterns
             NeuronalNetworkNeuronOutputsList memorizedNeuronOutputs,
             bool distort)
         {
-            // Function to back propagate through the neural net. 
+            // Function to back propagate through the neuronal net. 
             // Determine if it's time to adjust the learning rate
             this.mutexes[2].WaitOne();
             if (this.backProperties % this.AfterEveryNBackProperties == 0 && this.backProperties != 0)
@@ -539,12 +539,12 @@ namespace HandwrittenRecognition.Patterns
 
             this.mutexes[2].ReleaseMutex();
 
-            // Forward calculate through the neural network
-            this.CalculateNeuralNet(inputVector, inputCount, actualOutputVector, outputCount, memorizedNeuronOutputs, distort);
+            // Forward calculate through the neuronal network
+            this.CalculateNeuronalNetwork(inputVector, inputCount, actualOutputVector, outputCount, memorizedNeuronOutputs, distort);
 
             this.mutexes[2].WaitOne();
 
-            // Calculate error in the output of the neural network
+            // Calculate error in the output of the neuronal network
             // note that this code duplicates that found in many other places, and it's probably sensible to 
             // define a (global/static ??) function for it
             var localDmse = 0.0;
@@ -561,16 +561,16 @@ namespace HandwrittenRecognition.Patterns
             if (worthWhileBackPropagate && memorizedNeuronOutputs == null)
             {
                 // The caller has not provided a place to store neuron outputs, so we need to
-                // back propagate now, while the neural net is still captured. Otherwise, another thread
-                // might come along and call CalculateNeuralNet(), which would entirely change the neuron
+                // back propagate now, while the neuronal net is still captured. Otherwise, another thread
+                // might come along and call CalculateNeuronalNetwork(), which would entirely change the neuron
                 // outputs and thereby inject errors into back propagation 
                 this.NeuronalNetwork.BackPropagate(actualOutputVector, targetOutputVector, outputCount, null);
                 return;
             }
 
-            // If we have reached here, then the mutex for the neural net has been released for other 
+            // If we have reached here, then the mutex for the neuronal net has been released for other 
             // threads. The caller must have provided a place to store neuron outputs, which we can 
-            // use to back propagate, even if other threads call CalculateNeuralNet() and change the outputs
+            // use to back propagate, even if other threads call CalculateNeuronalNetwork() and change the outputs
             // of the neurons
             if (worthWhileBackPropagate)
             {

@@ -151,7 +151,7 @@ namespace HandwrittenRecognition
             this.radioButtonMnistTrainDatabase.Checked = false;
             this.pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            // Create neural network
+            // Create the neuronal network
             this.neuronalNetwork = new NeuronalNetwork();
             this.trainingNetwork = new NeuronalNetwork();
             CreateNeuronalNetwork(this.neuronalNetwork);
@@ -740,7 +740,7 @@ namespace HandwrittenRecognition
                 mutexes.Add(mutex);
             }
 
-            // Create the neural network
+            // Create the neuronal network
             try
             {
                 CreateNeuronalNetwork(this.trainingNetwork);

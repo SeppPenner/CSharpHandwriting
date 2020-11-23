@@ -3,7 +3,7 @@
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
-//   The neural network test patterns.
+//   The neuronal network test patterns.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ namespace HandwrittenRecognition.Patterns
     using NeuronalNetworkLibrary.NeuronalNetworkNeurons;
 
     /// <summary>
-    /// The neural network test patterns.
+    /// The neuronal network test patterns.
     /// </summary>
     // ReSharper disable ArrangeRedundantParentheses
     public class NeuronalNetworkTestPatterns : NeuronalNetworkForwardPropagation
@@ -201,8 +201,8 @@ namespace HandwrittenRecognition.Patterns
 
                 targetOutputVector[label] = 1.0;
 
-                // forward calculate through the neural net
-                this.CalculateNeuralNet(inputVector, 841, actualOutputVector, 10, memorizedNeuronOutputs, false);
+                // Forward calculate through the neuronal network
+                this.CalculateNeuronalNetwork(inputVector, 841, actualOutputVector, 10, memorizedNeuronOutputs, false);
 
                 var bestIndex = 0;
                 var maxValue = -99.0;
@@ -335,8 +335,8 @@ namespace HandwrittenRecognition.Patterns
 
             targetOutputVector[label] = 1.0;
 
-            // Forward calculate through the neural net
-            this.CalculateNeuralNet(inputVector, 841, actualOutputVector, 10, memorizedNeuronOutputs, false);
+            // Forward calculate through the neuronal net
+            this.CalculateNeuronalNetwork(inputVector, 841, actualOutputVector, 10, memorizedNeuronOutputs, false);
             var bestIndex = 0;
             var maxValue = -99.0;
 
@@ -426,8 +426,8 @@ namespace HandwrittenRecognition.Patterns
 
             targetOutputVector[label] = 1.0;
 
-            // Forward calculate through the neural net
-            this.CalculateNeuralNet(inputVector, 841, actualOutputVector, 10, memorizedNeuronOutputs, false);
+            // Forward calculate through the neuronal net
+            this.CalculateNeuronalNetwork(inputVector, 841, actualOutputVector, 10, memorizedNeuronOutputs, false);
             var bestIndex = 0;
             var maxValue = -99.0;
 
