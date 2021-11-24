@@ -2,7 +2,6 @@ CSharpHandwriting
 ====================================
 
 CSharpHandwriting is an assembly/ library to run a handwriting recognition in .Net.
-The assembly was written and tested in .Net 5.0.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/l77q1a5mb64954qc?svg=true)](https://ci.appveyor.com/project/SeppPenner/csharphandwriting)
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/CSharpHandwriting.svg)](https://github.com/SeppPenner/CSharpHandwriting/issues)
