@@ -9,17 +9,12 @@
 
 namespace NeuronalNetworkLibrary.DataFiles
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
     using System.Text;
 
     /// <summary>
     /// The ini file class.
     /// </summary>
-    [SuppressMessage(
-        "StyleCop.CSharp.DocumentationRules",
-        "SA1650:ElementDocumentationMustBeSpelledCorrectly",
-        Justification = "Reviewed. Suppression is OK here.")]
     public class IniFile
     {
         /// <summary>

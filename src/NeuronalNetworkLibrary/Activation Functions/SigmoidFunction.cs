@@ -10,7 +10,6 @@
 namespace NeuronalNetworkLibrary.Activation_Functions
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <inheritdoc cref="IActivationFunction"/>
     /// <summary>
@@ -50,7 +49,6 @@ namespace NeuronalNetworkLibrary.Activation_Functions
         /// </summary>
         /// <param name="x">The x value.</param>
         /// <returns>The value of the derivative Sigmoid function.</returns>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public static double DeSigmoid(double x)
         {
             return 0.66666667 / 1.7159 * (1.7159 + x) * (1.7159 - x);

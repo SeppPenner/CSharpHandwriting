@@ -10,7 +10,6 @@
 namespace HandwrittenRecognition.Patterns
 {
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
     using NeuronalNetworkLibrary;
@@ -48,7 +47,6 @@ namespace HandwrittenRecognition.Patterns
         /// <summary>
         /// The mutexes.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private readonly List<Mutex> mutexes;
 
         /// <summary>
@@ -77,7 +75,6 @@ namespace HandwrittenRecognition.Patterns
         /// <param name="eventStopped">The event stopped event.</param>
         /// <param name="mainForm">The form.</param>
         /// <param name="mutexes">The mutexes.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public NeuronalNetworkTestPatterns(
             NeuronalNetwork neuronalNetwork,
             NeuronalNetworkDatabase testingSet,
@@ -111,8 +108,6 @@ namespace HandwrittenRecognition.Patterns
         /// <param name="preferences">The preferences.</param>
         /// <param name="mainForm">The main form.</param>
         /// <param name="mutexes">The mutexes.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once UnusedMember.Global
         public NeuronalNetworkTestPatterns(NeuronalNetwork neuronalNetwork, Preferences preferences, MainForm mainForm, List<Mutex> mutexes)
         {
             this.CurrentPatternIndex = 0;

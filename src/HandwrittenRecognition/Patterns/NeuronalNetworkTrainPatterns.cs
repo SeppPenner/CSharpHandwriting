@@ -11,7 +11,6 @@ namespace HandwrittenRecognition.Patterns
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Threading;
 
@@ -50,7 +49,6 @@ namespace HandwrittenRecognition.Patterns
         /// <summary>
         /// The mutexes.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private readonly List<Mutex> mutexes;
 
         /// <summary>
@@ -109,7 +107,6 @@ namespace HandwrittenRecognition.Patterns
         /// <param name="eventStopped">The event stopped event.</param>
         /// <param name="mainForm">The main form.</param>
         /// <param name="mutexes">The mutexes.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public NeuronalNetworkTrainPatterns(
             NeuronalNetwork neuronalNetwork,
             NeuronalNetworkDatabase trainingSet,
@@ -143,25 +140,21 @@ namespace HandwrittenRecognition.Patterns
         /// <summary>
         /// The estimated current MSE.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Reviewed. Suppression is OK here.")]
         public double EstimatedCurrentMse { get; set; }
 
         /// <summary>
         /// The ETA decay.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Reviewed. Suppression is OK here.")]
         public double EtaDecay { get; set; }
 
         /// <summary>
         /// The minimum ETA.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Reviewed. Suppression is OK here.")]
         public double MinimumEta { get; set; }
 
         /// <summary>
         /// Back propagation and training-related members.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Reviewed. Suppression is OK here.")]
         public uint AfterEveryNBackProperties { get; set; }
 
         /// <summary>

@@ -47,24 +47,22 @@ namespace NeuronalNetworkLibrary.DataFiles
         /// <summary>
         /// The load image file stream.
         /// </summary>
-        private BinaryReader loadImageFileStream;
+        private BinaryReader? loadImageFileStream;
 
         /// <summary>
         /// The load label file stream.
         /// </summary>
-        private BinaryReader loadLabelFileStream;
+        private BinaryReader? loadLabelFileStream;
 
         /// <summary>
         /// The image file name.
         /// </summary>
-        // ReSharper disable once NotAccessedField.Local
-        private string imageFileName;
+        private string? imageFileName;
 
         /// <summary>
         /// The label file name.
         /// </summary>
-        // ReSharper disable once NotAccessedField.Local
-        private string labelFileName;
+        private string? labelFileName;
 
         /// <summary>
         /// The item count.
@@ -86,11 +84,11 @@ namespace NeuronalNetworkLibrary.DataFiles
             this.nextPattern = 0;
             this.imageFileOpen = false;
             this.labelFileOpen = false;
-            this.ImagePatterns = null;
+            this.ImagePatterns = new();
             this.loadImageFileStream = null;
             this.loadLabelFileStream = null;
             this.DatabaseReady = false;
-            this.randomizedPatternSequence = null;
+            this.randomizedPatternSequence = Array.Empty<int>();
             this.FromRandomizedPatternSequence = false;
         }
 
@@ -107,8 +105,6 @@ namespace NeuronalNetworkLibrary.DataFiles
         /// <summary>
         /// Gets or sets a value indicating whether the database is ready or not.
         /// </summary>
-        // ReSharper disable once UnusedMember.Global
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private bool DatabaseReady { get; set; }
 
         /// <summary>
@@ -123,13 +119,13 @@ namespace NeuronalNetworkLibrary.DataFiles
             // Close the files if opened
             if (this.imageFileOpen)
             {
-                this.loadImageFileStream.Close();
+                this.loadImageFileStream?.Close();
                 this.imageFileOpen = false;
             }
 
             if (this.labelFileOpen)
             {
-                this.loadLabelFileStream.Close();
+                this.loadLabelFileStream?.Close();
                 this.labelFileOpen = false;
             }
 
@@ -273,8 +269,8 @@ namespace NeuronalNetworkLibrary.DataFiles
         /// </summary>
         private void CloseDatabaseFiles()
         {
-            this.loadLabelFileStream.Close();
-            this.loadImageFileStream.Close();
+            this.loadLabelFileStream?.Close();
+            this.loadImageFileStream?.Close();
             this.imageFileOpen = false;
             this.labelFileOpen = false;
         }
@@ -396,7 +392,7 @@ namespace NeuronalNetworkLibrary.DataFiles
         /// <param name="patternLabel">The pattern label.</param>
         /// <param name="patternArray">The pattern array.</param>
         /// <param name="flipGrayscale">A value indicating whether the bytes should be flipped with Grayscale algorithm.</param>
-        private void GetPatternArrayValues(out byte patternLabel, byte[] patternArray = null, bool flipGrayscale = true)
+        private void GetPatternArrayValues(out byte patternLabel, byte[]? patternArray = null, bool flipGrayscale = true)
         {
             const uint ImageSize = SystemGlobals.ImageSize * SystemGlobals.ImageSize;
 
@@ -405,6 +401,7 @@ namespace NeuronalNetworkLibrary.DataFiles
                 if (patternArray != null)
                 {
                     this.loadImageFileStream.Read(patternArray, 0, (int)ImageSize);
+
                     if (flipGrayscale)
                     {
                         for (var ii = 0; ii < ImageSize; ++ii)

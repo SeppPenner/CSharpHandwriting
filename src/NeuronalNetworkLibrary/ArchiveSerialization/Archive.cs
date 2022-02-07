@@ -71,7 +71,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Serializes the archive serialization.
         /// </summary>
         /// <param name="obj">The object.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Serialize(IArchiveSerialization obj)
         {
             obj.Serialize(this);
@@ -81,7 +80,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Writes a char value.
         /// </summary>
         /// <param name="ch">The char value.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Write(char ch)
         {
             this.writer.Write(Convert.ToInt16(ch));
@@ -91,8 +89,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Writes the ushort value.
         /// </summary>
         /// <param name="n">The ushort value value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once UnusedMember.Global
         public void Write(ushort n)
         {
             this.writer.Write(n);
@@ -102,7 +98,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Writes the short value.
         /// </summary>
         /// <param name="n">The short value.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Write(short n)
         {
             this.writer.Write(n);
@@ -112,7 +107,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Writes the uint value.
         /// </summary>
         /// <param name="n">The uint value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public void Write(uint n)
         {
             this.writer.Write(n);
@@ -122,7 +116,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Writes the int value.
         /// </summary>
         /// <param name="n">The int value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public void Write(int n)
         {
             this.writer.Write(n);
@@ -132,8 +125,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Writes the ulong value.
         /// </summary>
         /// <param name="n">The ulong value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once UnusedMember.Global
         public void Write(ulong n)
         {
             this.writer.Write(n);
@@ -194,8 +185,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Writes the bool value.
         /// </summary>
         /// <param name="b">The bool value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once UnusedMember.Global
         public void Write(bool b)
         {
             this.writer.Write(b);
@@ -215,7 +204,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Writes the GUID value.
         /// </summary>
         /// <param name="guid">The GUID value.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Write(Guid guid)
         {
             var bytes = guid.ToByteArray();
@@ -243,8 +231,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the ushort value.
         /// </summary>
         /// <param name="n">The ushort value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once UnusedMember.Global
         public void Read(out ushort n)
         {
             var bytes = new byte[2];
@@ -256,7 +242,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the uint value.
         /// </summary>
         /// <param name="n">The uint value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public void Read(out uint n)
         {
             var bytes = new byte[4];
@@ -268,7 +253,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the int value.
         /// </summary>
         /// <param name="n">The int value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public void Read(out int n)
         {
             var bytes = new byte[4];
@@ -280,8 +264,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the ulong value.
         /// </summary>
         /// <param name="n">The ulong value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once UnusedMember.Global
         public void Read(out ulong n)
         {
             var bytes = new byte[8];
@@ -293,7 +275,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the char value.
         /// </summary>
         /// <param name="ch">The char value.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Read(out char ch)
         {
             this.Read(out short n);
@@ -304,7 +285,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the float value.
         /// </summary>
         /// <param name="d">The float value.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Read(out float d)
         {
             var bytes = new byte[4];
@@ -342,7 +322,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the date time value.
         /// </summary>
         /// <param name="dt">The date time value.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Read(out DateTime dt)
         {
             this.Read(out long l);
@@ -353,8 +332,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the bool value.
         /// </summary>
         /// <param name="b">The bool value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once UnusedMember.Global
         public void Read(out bool b)
         {
             var bytes = new byte[1];
@@ -366,7 +343,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the GUID value.
         /// </summary>
         /// <param name="guid">The GUID value.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Read(out Guid guid)
         {
             this.Read(out var bytes, 16);

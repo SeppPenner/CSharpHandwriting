@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Preferences.cs" company="Hämmer Electronics">
+// <copyright file="Preferences.cs" company="Hï¿½mmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
@@ -10,7 +10,6 @@
 namespace NeuronalNetworkLibrary.ArchiveSerialization
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO;
 
     using NeuronalNetworkLibrary.DataFiles;
@@ -34,7 +33,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// <summary>
         /// The ini file.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private readonly IniFile iniFile;
 
         /// <summary>
@@ -49,8 +47,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// "Stochastic Diagonal Levenberg-Marquardt" update algorithm. See Yann LeCun 1998
         /// "Gradient-Based Learning Applied to Document Recognition" at page 41
         /// </summary>
-        // ReSharper disable once NotAccessedField.Local
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private double micronLimitParameter;
 
         /// <summary>
@@ -171,13 +167,11 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// <summary>
         /// Gets or sets the elastic sigma for randomness in Simard's elastic distortions. 
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public double ElasticSigma { get; set; }
 
         /// <summary>
         /// Gets or sets the elastic scaling factor for after-smoothing scale factor for Simard's elastic distortions.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public double ElasticScaling { get; set; }
 
         /// <summary>
@@ -225,7 +219,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// <summary>
         /// Reads the ini file.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private void ReadIniFile()
         {
             // Now read values from the ini file

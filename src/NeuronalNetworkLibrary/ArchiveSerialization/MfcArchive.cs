@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MfcArchive.cs" company="Hämmer Electronics">
+// <copyright file="MfcArchive.cs" company="Hï¿½mmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
@@ -10,7 +10,6 @@
 namespace NeuronalNetworkLibrary.ArchiveSerialization
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO;
 
     /// <summary>
@@ -37,7 +36,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads a decimal value.
         /// </summary>
         /// <param name="d">The decimal value.</param>
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         // ReSharper disable once UnusedMember.Global
         public new void Read(out decimal d)
         {
@@ -61,8 +59,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads a bool value.
         /// </summary>
         /// <param name="b">The bool value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         // ReSharper disable once UnusedMember.Global
         public new void Read(out bool b)
         {
@@ -75,8 +71,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the date time value.
         /// </summary>
         /// <param name="dt">The date time value.</param>
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once UnusedMember.Global
         public new void Read(out DateTime dt)
         {
             // Status is a 32-bit "long" in C++
@@ -96,9 +90,6 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// Reads the nullable date time value.
         /// </summary>
         /// <param name="dt">The nullable date time value.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once UnusedMember.Global
         public void Read(out DateTime? dt)
         {
             // Status is a 32-bit "long" in C++
@@ -140,10 +131,8 @@ namespace NeuronalNetworkLibrary.ArchiveSerialization
         /// <param name="l1">The first int value.</param>
         /// <param name="l2">The second int value.</param>
         /// <returns>The long value.</returns>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private static long MakeInt64(int l1, int l2)
         {
-            // ReSharper disable once ShiftExpressionRealShiftCountIsZero
             return (uint)l1 | ((uint)l2 << 32);
         }
     }

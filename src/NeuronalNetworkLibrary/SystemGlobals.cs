@@ -9,8 +9,6 @@
 
 namespace NeuronalNetworkLibrary
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// A class for global constant definitions.
     /// </summary>
@@ -48,7 +46,6 @@ namespace NeuronalNetworkLibrary
         /// <summary>
         /// The ulong maximum.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public const ulong UlongMaximum = 0xffffffff;
 
         /// <summary>

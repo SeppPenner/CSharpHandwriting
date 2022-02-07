@@ -11,7 +11,6 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
     using NeuronalNetworkLibrary.ArchiveSerialization;
@@ -56,8 +55,6 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
         /// <summary>
         /// The mutexes.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        // ReSharper disable once CollectionNeverUpdated.Local
         private readonly List<Mutex> mutexes;
 
         /// <summary>
@@ -137,7 +134,6 @@ namespace NeuronalNetworkLibrary.NeuronalNetwork
         /// Gets the Gaussian sigma.
         /// </summary>
         /// <param name="elasticSigma">The elastic sigma.</param>
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1119:StatementMustNotUseUnnecessaryParenthesis", Justification = "Reviewed. Suppression is OK here.")]
         protected void GetGaussianKernel(double elasticSigma)
         {
             // Create a Gaussian kernel, which is constant, for use in generating elastic distortions
