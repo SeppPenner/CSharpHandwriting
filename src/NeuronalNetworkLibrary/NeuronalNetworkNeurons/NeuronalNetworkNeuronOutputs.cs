@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="NeuronalNetworkNeuronOutputs.cs" company="Hämmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
@@ -7,40 +7,35 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NeuronalNetworkLibrary.NeuronalNetworkNeurons
+namespace NeuronalNetworkLibrary.NeuronalNetworkNeurons;
+
+/// <inheritdoc cref="List{T}"/>
+/// <summary>
+/// The neuronal network neuron outputs class.
+/// </summary>
+/// <seealso cref="List{T}"/>
+public class NeuronalNetworkNeuronOutputs : List<double>
 {
-    using System.Collections.Generic;
-
-    /// <inheritdoc cref="List{T}"/>
     /// <summary>
-    /// The neuronal network neuron outputs class.
+    /// Initializes a new instance of the <see cref="NeuronalNetworkNeuronOutputs"/> class.
     /// </summary>
-    /// <seealso cref="List{T}"/>
-    public class NeuronalNetworkNeuronOutputs : List<double>
+    public NeuronalNetworkNeuronOutputs()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NeuronalNetworkNeuronOutputs"/> class.
-        /// </summary>
-        // ReSharper disable once UnusedMember.Global
-        public NeuronalNetworkNeuronOutputs()
-        {
-        }
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NeuronalNetworkNeuronOutputs"/> class.
-        /// </summary>
-        /// <param name="capacity">The capacity.</param>
-        public NeuronalNetworkNeuronOutputs(int capacity) : base(capacity)
-        {
-        }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NeuronalNetworkNeuronOutputs"/> class.
+    /// </summary>
+    /// <param name="capacity">The capacity.</param>
+    public NeuronalNetworkNeuronOutputs(int capacity) : base(capacity)
+    {
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NeuronalNetworkNeuronOutputs"/> class.
-        /// </summary>
-        /// <param name="collection">The collection.</param>
-        // ReSharper disable once UnusedMember.Global
-        public NeuronalNetworkNeuronOutputs(IEnumerable<double> collection) : base(collection)
-        {
-        }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NeuronalNetworkNeuronOutputs"/> class.
+    /// </summary>
+    /// <param name="collection">The collection.</param>
+    public NeuronalNetworkNeuronOutputs(IEnumerable<double> collection) : base(collection)
+    {
     }
 }

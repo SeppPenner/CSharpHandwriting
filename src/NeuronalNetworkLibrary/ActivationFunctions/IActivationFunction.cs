@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="IActivationFunction.cs" company="Hämmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
@@ -7,12 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NeuronalNetworkLibrary.Activation_Functions
+namespace NeuronalNetworkLibrary.ActivationFunctions;
+
+/// <summary>
+/// An interface for the activation function.
+/// </summary>
+public interface IActivationFunction
 {
-    /// <summary>
-    /// An interface for the activation function.
-    /// </summary>
-    public interface IActivationFunction
-    {
-    }
 }

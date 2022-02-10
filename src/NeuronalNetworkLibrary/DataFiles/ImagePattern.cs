@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ImagePattern.cs" company="Hämmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
@@ -7,21 +7,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NeuronalNetworkLibrary.DataFiles
+namespace NeuronalNetworkLibrary.DataFiles;
+
+/// <summary>
+///     The image pattern class.
+/// </summary>
+public class ImagePattern
 {
     /// <summary>
-    ///     The image pattern class.
+    /// Gets or sets the label.
     /// </summary>
-    public class ImagePattern
-    {
-        /// <summary>
-        /// Gets or sets the label.
-        /// </summary>
-        public byte Label { get; set; }
+    public byte Label { get; set; }
 
-        /// <summary>
-        /// Gets or sets the pattern.
-        /// </summary>
-        public byte[] Pattern { get; set; } = new byte[SystemGlobals.ImageSize * SystemGlobals.ImageSize];
-    }
+    /// <summary>
+    /// Gets or sets the pattern.
+    /// </summary>
+    public byte[] Pattern { get; set; } = new byte[SystemGlobals.ImageSize * SystemGlobals.ImageSize];
 }

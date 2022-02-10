@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ImageFileBeginning.cs" company="Hämmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
@@ -7,34 +7,30 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NeuronalNetworkLibrary.DataFiles
+namespace NeuronalNetworkLibrary.DataFiles;
+
+/// <summary>
+/// The beginning of the label file.
+/// </summary>
+public struct ImageFileBeginning
 {
     /// <summary>
-    /// The beginning of the label file.
+    /// The magic number.
     /// </summary>
-    public struct ImageFileBeginning
-    {
-        /// <summary>
-        /// The magic number.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Global
-        public int MagicNumber;
+    public int MagicNumber;
 
-        /// <summary>
-        /// The number of items.
-        /// </summary>
-        public int Items;
+    /// <summary>
+    /// The number of items.
+    /// </summary>
+    public int Items;
 
-        /// <summary>
-        /// The number of rows.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Global
-        public int Rows;
+    /// <summary>
+    /// The number of rows.
+    /// </summary>
+    public int Rows;
 
-        /// <summary>
-        /// The number of columns.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Global
-        public int Columns;
-    }
+    /// <summary>
+    /// The number of columns.
+    /// </summary>
+    public int Columns;
 }

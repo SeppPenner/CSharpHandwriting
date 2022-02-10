@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ArchiveOperation.cs" company="Hämmer Electronics">
+// <copyright file="ArchiveOperation.cs" company="HÃ¤mmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
@@ -7,21 +7,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NeuronalNetworkLibrary.ArchiveSerialization
+namespace NeuronalNetworkLibrary.ArchiveSerialization;
+
+/// <summary>
+/// An enumeration for the archive operation.
+/// </summary>
+public enum ArchiveOperation
 {
     /// <summary>
-    /// An enumeration for the archive operation.
+    /// The load archive operation.
     /// </summary>
-    public enum ArchiveOperation
-    {
-        /// <summary>
-        /// The load archive operation.
-        /// </summary>
-        Load = 0,
+    Load = 0,
 
-        /// <summary>
-        /// The store archive operation.
-        /// </summary>
-        Store = 1
-    }
+    /// <summary>
+    /// The store archive operation.
+    /// </summary>
+    Store = 1
 }

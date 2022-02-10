@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="VersionException.cs" company="Hämmer Electronics">
+// <copyright file="VersionException.cs" company="Hï¿½mmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
@@ -7,15 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NeuronalNetworkLibrary.ArchiveSerialization
-{
-    using System;
+namespace NeuronalNetworkLibrary.ArchiveSerialization;
 
-    /// <summary>
-    /// An exception for the serialization of the wrong version.s
-    /// </summary>
-    // ReSharper disable once UnusedMember.Global
-    public class VersionException : SystemException
-    {
-    }
+/// <summary>
+/// An exception for the serialization of the wrong version.
+/// </summary>
+public class VersionException : SystemException
+{
 }

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IArchiveSerialization.cs" company="Hämmer Electronics">
+// <copyright file="IArchiveSerialization.cs" company="HÃ¤mmer Electronics">
 //   Copyright (c) All rights reserved.
 // </copyright>
 // <summary>
@@ -7,17 +7,16 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NeuronalNetworkLibrary.ArchiveSerialization
+namespace NeuronalNetworkLibrary.ArchiveSerialization;
+
+/// <summary>
+/// An interface for the archive serialization.
+/// </summary>
+public interface IArchiveSerialization
 {
     /// <summary>
-    /// An interface for the archive serialization.
+    /// Serializes the archive.
     /// </summary>
-    public interface IArchiveSerialization
-    {
-        /// <summary>
-        /// Serializes the archive.
-        /// </summary>
-        /// <param name="archive">The archive.</param>
-        void Serialize(Archive archive);
-    }
+    /// <param name="archive">The archive.</param>
+    void Serialize(Archive archive);
 }
