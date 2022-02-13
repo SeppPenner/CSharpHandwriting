@@ -388,6 +388,16 @@ public class NeuronalNetworkDatabase
     /// <param name="flipGrayscale">A value indicating whether the bytes should be flipped with Grayscale algorithm.</param>
     private void GetPatternArrayValues(out byte patternLabel, byte[]? patternArray = null, bool flipGrayscale = true)
     {
+        if (this.loadImageFileStream is null)
+        {
+            throw new ArgumentNullException(nameof(this.loadImageFileStream), "The load image file stream wasn't initialized properly.");
+        }
+
+        if (this.loadLabelFileStream is null)
+        {
+            throw new ArgumentNullException(nameof(this.loadLabelFileStream), "The load label file stream wasn't initialized properly.");
+        }
+
         const uint ImageSize = SystemGlobals.ImageSize * SystemGlobals.ImageSize;
 
         if (this.imageFileOpen)

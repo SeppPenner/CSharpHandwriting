@@ -105,6 +105,11 @@ public class MfcArchive : Archive
     /// <param name="s">The string.</param>
     public new void Read(out string s)
     {
+        if (this.Reader is null)
+        {
+            throw new ArgumentNullException(nameof(this.Reader), "The reader wasn't initialized properly.");
+        }
+
         s = MfcStringReader.ReadCString(this.Reader);
     }
 
@@ -114,6 +119,11 @@ public class MfcArchive : Archive
     /// <param name="s">The unicode string.</param>
     public void ReadUnicodeString(out string s)
     {
+        if (this.Reader is null)
+        {
+            throw new ArgumentNullException(nameof(this.Reader), "The reader wasn't initialized properly.");
+        }
+
         s = this.Reader.ReadString();
     }
 

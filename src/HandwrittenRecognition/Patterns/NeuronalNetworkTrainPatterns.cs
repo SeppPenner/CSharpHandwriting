@@ -488,9 +488,15 @@ public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
         NeuronalNetworkNeuronOutputsList memorizedNeuronOutputs,
         bool distort)
     {
+        if (this.NeuronalNetwork is null)
+        {
+            throw new ArgumentNullException(nameof(this.NeuronalNetwork), "The neuronal network wasn't initialized properly.");
+        }
+
         // Function to back propagate through the neuronal net. 
         // Determine if it's time to adjust the learning rate
         this.mutexes[2].WaitOne();
+
         if (this.backProperties % this.AfterEveryNBackProperties == 0 && this.backProperties != 0)
         {
             var eta = this.NeuronalNetwork.EtaLearningRate;

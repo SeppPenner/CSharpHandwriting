@@ -246,6 +246,11 @@ public sealed class NeuronalNetwork : IArchiveSerialization
         {
             if (memorized)
             {
+                if (memorizedNeuronOutputs is null)
+                {
+                    throw new ArgumentNullException(nameof(memorizedNeuronOutputs), "The load image file stream wasn't initialized properly.");
+                }
+
                 this.LayersList[jj].BackPropagate(
                     differentials[jj],
                     differentials[jj - 1],

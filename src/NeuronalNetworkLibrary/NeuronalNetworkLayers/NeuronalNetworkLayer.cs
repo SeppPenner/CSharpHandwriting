@@ -90,6 +90,11 @@ public sealed class NeuronalNetworkLayer : IArchiveSerialization
                 }
                 else
                 {
+                    if (this.previousLayer is null)
+                    {
+                        continue;
+                    }
+
                     sum += this.Weights[(int)cit.WeightIndex].Value
                            * this.previousLayer.Neurons[(int)cit.NeuronIndex].Output;
                 }
@@ -137,6 +142,11 @@ public sealed class NeuronalNetworkLayer : IArchiveSerialization
             // Calculate dErr_wrt_dYn = F'(Yn) * dErr_wrt_Xn
             for (ii = 0; ii < this.Neurons.Count; ii++)
             {
+                if (thisLayerOutput is null)
+                {
+                    continue;
+                }
+
                 output = memorized ? thisLayerOutput[ii] : this.Neurons[ii].Output;
                 neuronsErrorList.Add(SigmoidFunction.DeSigmoid(output) * errorList[ii]);
             }
@@ -158,6 +168,11 @@ public sealed class NeuronalNetworkLayer : IArchiveSerialization
                     }
                     else
                     {
+                        if (this.previousLayer is null || previousLayerOutput is null)
+                        {
+                            continue;
+                        }
+
                         output = memorized
                                      ? previousLayerOutput[(int)kk]
                                      : this.previousLayer.Neurons[(int)kk].Output;
@@ -333,6 +348,11 @@ public sealed class NeuronalNetworkLayer : IArchiveSerialization
             {
                 try
                 {
+                    if (this.previousLayer is null)
+                    {
+                        continue;
+                    }
+
                     kk = connection.NeuronIndex;
                     output = kk == 0xffffffff ? 1.0 : this.previousLayer.Neurons[(int)kk].Output;
                     weightsErrorList[connection.WeightIndex] = neuronsErrorList[ii] * output * output;
