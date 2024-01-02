@@ -155,12 +155,12 @@ public partial class MainForm : DelegateForm
     /// <summary>
     /// A delegate to add objects.
     /// </summary>
-    public readonly DelegateAddObject? DelegateAddObject;
+    public readonly new DelegateAddObject? DelegateAddObject;
 
     /// <summary>
     /// A delegate to handle the finished thread.
     /// </summary>
-    public DelegateThreadFinished? DelegateThreadFinished;
+    public new DelegateThreadFinished? DelegateThreadFinished;
 
     /// <summary>
     /// Stops the threads.

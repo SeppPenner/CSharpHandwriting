@@ -214,12 +214,20 @@ public class NeuronalNetworkTestPatterns : NeuronalNetworkForwardPropagation
                 this.number++;
                 s = "Pattern No:" + this.nextPattern + " Recognized value:" + bestIndex + " Actual value:"
                     + label;
-                this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 6, s);
+
+                if (this.mainForm?.DelegateAddObject is not null)
+                {
+                    this.mainForm.Invoke(this.mainForm.DelegateAddObject, 6, s);
+                }
             }
             else
             {
                 s = this.nextPattern + ", Mis numbers:" + this.number;
-                this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 7, s);
+
+                if (this.mainForm?.DelegateAddObject is not null)
+                {
+                    this.mainForm.Invoke(this.mainForm.DelegateAddObject, 7, s);
+                }
             }
 
             // check if thread is cancelled
@@ -232,7 +240,10 @@ public class NeuronalNetworkTestPatterns : NeuronalNetworkForwardPropagation
                 // Make synchronous call to main form.
                 // MainForm.AddString function runs in main thread.
                 // To make asynchronous call use BeginInvoke
-                this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 8, s);
+                if (this.mainForm?.DelegateAddObject is not null)
+                {
+                    this.mainForm.Invoke(this.mainForm.DelegateAddObject, 8, s);
+                }
 
                 // Inform main thread that this thread stopped
                 this.eventStopped?.Set();
@@ -246,7 +257,11 @@ public class NeuronalNetworkTestPatterns : NeuronalNetworkForwardPropagation
 
         {
             var s = $"Testing thread: {Thread.CurrentThread.Name} stopped";
-            this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 8, s);
+
+            if (this.mainForm?.DelegateAddObject is not null)
+            {
+                this.mainForm.Invoke(this.mainForm.DelegateAddObject, 8, s);
+            }
         }
     }
 
@@ -347,7 +362,11 @@ public class NeuronalNetworkTestPatterns : NeuronalNetworkForwardPropagation
         }
 
         var s = bestIndex.ToString();
-        this.mainForm.Invoke(this.mainForm.DelegateAddObject, 2, s);
+
+        if (this.mainForm?.DelegateAddObject is not null)
+        {
+            this.mainForm.Invoke(this.mainForm.DelegateAddObject, 2, s);
+        }
 
         // Check if thread is cancelled
         this.mutexes[1].ReleaseMutex();
@@ -437,7 +456,11 @@ public class NeuronalNetworkTestPatterns : NeuronalNetworkForwardPropagation
         }
 
         var s = bestIndex.ToString();
-        this.mainForm.Invoke(this.mainForm.DelegateAddObject, 1, s);
+
+        if (this.mainForm?.DelegateAddObject is not null)
+        {
+            this.mainForm.Invoke(this.mainForm.DelegateAddObject, 1, s);
+        }
 
         // Check if thread is cancelled
         this.mutexes[1].ReleaseMutex();

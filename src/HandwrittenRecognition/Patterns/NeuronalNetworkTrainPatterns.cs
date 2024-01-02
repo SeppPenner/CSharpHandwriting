@@ -297,7 +297,12 @@ public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
             {
                 this.dmse200 /= 200;
                 s = "MSE:" + this.dmse200.ToString(CultureInfo.InvariantCulture);
-                this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 4, s);
+
+                if (this.mainForm?.DelegateAddObject is not null)
+                {
+                    this.mainForm.Invoke(this.mainForm.DelegateAddObject, 4, s);
+                }
+
                 this.dmse200 = 0;
                 this.neuronalNetworks = 0;
             }
@@ -307,7 +312,10 @@ public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
             // Make synchronous call to main form.
             // MainForm.AddString function runs in main thread.
             // To make asynchronous call use BeginInvoke
-            this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 5, s);
+            if (this.mainForm?.DelegateAddObject is not null)
+            {
+                this.mainForm.Invoke(this.mainForm.DelegateAddObject, 5, s);
+            }
 
             if (this.nextPattern >= this.database.ImagePatterns.Count - 1)
             {
@@ -319,7 +327,11 @@ public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
                 // Make synchronous call to main form.
                 // MainForm.AddString function runs in main thread.
                 // To make asynchronous call use BeginInvoke
-                this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 3, s);
+                if (this.mainForm?.DelegateAddObject is not null)
+                {
+                    this.mainForm.Invoke(this.mainForm.DelegateAddObject, 3, s);
+                }
+
                 this.recognitions = 0;
                 this.epochsCompleted++;
                 this.nextPattern = 0;
@@ -333,7 +345,10 @@ public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
                 // Make synchronous call to main form.
                 // MainForm.AddString function runs in main thread.
                 // To make asynchronous call use BeginInvoke
-                this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 3, $"BackPropagation thread: {Thread.CurrentThread.Name} stopped");
+                if (this.mainForm?.DelegateAddObject is not null)
+                {
+                    this.mainForm.Invoke(this.mainForm.DelegateAddObject, 3, $"BackPropagation thread: {Thread.CurrentThread.Name} stopped");
+                }
 
                 // Inform main thread that this thread stopped
                 this.eventStopped.Set();
@@ -384,7 +399,10 @@ public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
         // Make synchronous call to main form.
         // MainForm.AddString function runs in main thread.
         // To make asynchronous call use BeginInvoke
-        this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 3, "Commencing Calculation of Hessian...");
+        if (this.mainForm?.DelegateAddObject is not null)
+        {
+            this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 3, "Commencing Calculation of Hessian...");
+        }
 
         // Some of this code is similar to the Back propagation thread code
         this.NeuronalNetwork.EraseHessianInformation();
@@ -457,7 +475,10 @@ public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
             // Make synchronous call to main form.
             // MainForm.AddString function runs in main thread.
             // To make asynchronous call use BeginInvoke
-            this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 3, "BackPropagation stopped");
+            if (this.mainForm?.DelegateAddObject is not null)
+            {
+                this.mainForm.Invoke(this.mainForm.DelegateAddObject, 3, "BackPropagation stopped");
+            }
 
             // Inform main thread that this thread stopped
             this.eventStopped.Set();
@@ -465,7 +486,12 @@ public class NeuronalNetworkTrainPatterns : NeuronalNetworkForwardPropagation
         }
 
         this.NeuronalNetwork.DivideHessianInformationBy(numbersOfPatternsSampled);
-        this.mainForm?.Invoke(this.mainForm.DelegateAddObject, 3, "Calculation of Hessian...completed");
+
+        if (this.mainForm?.DelegateAddObject is not null)
+        {
+            this.mainForm.Invoke(this.mainForm.DelegateAddObject, 3, "Calculation of Hessian...completed");
+        }
+        
         this.mutexes[1].ReleaseMutex();
     }
 
