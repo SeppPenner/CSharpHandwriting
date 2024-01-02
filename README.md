@@ -8,6 +8,9 @@ CSharpHandwriting is an assembly/ library to run a handwriting recognition in .N
 [![GitHub forks](https://img.shields.io/github/forks/SeppPenner/CSharpHandwriting.svg)](https://github.com/SeppPenner/CSharpHandwriting/network)
 [![GitHub stars](https://img.shields.io/github/stars/SeppPenner/CSharpHandwriting.svg)](https://github.com/SeppPenner/CSharpHandwriting/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/SeppPenner/CSharpHandwriting/master/License.txt)
+[![Blogger](https://img.shields.io/badge/Follow_me_on-blogger-orange)](https://franzhuber23.blogspot.de/)
+[![Patreon](https://img.shields.io/badge/Patreon-F96854?logo=patreon&logoColor=white)](https://patreon.com/SeppPennerOpenSourceDevelopment)
+[![PayPal](https://img.shields.io/badge/PayPal-00457C?logo=paypal&logoColor=white)](https://paypal.me/th070795)
 
 The project is not finished and throws errors currently.
 
